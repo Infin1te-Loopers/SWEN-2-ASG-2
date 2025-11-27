@@ -11,3 +11,14 @@ class Employer(db.Model):
     def __init__(self, username, user_id):
         self.username = username
         self.user_id = user_id
+
+    def toJSON(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "user_id": self.user_id,
+            "positions": [position.toJSON() for position in self.positions]
+        }
+
+    def __repr__(self):
+        return f"<Employer {self.id}: {self.username}>"
